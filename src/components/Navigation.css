@@ -1,105 +1,367 @@
-/* Mobile Header - Always visible on mobile */
+/* src/components/Navigation.css - Enhanced Version */
+
+/* ==========================================================================
+   SMART MOBILE HEADER
+   ========================================================================== */
+
 .mobile-header {
     display: none;
-    /* Hidden on desktop */
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    height: 60px;
+    height: 70px;
     background: linear-gradient(145deg, #8b5a8c, #7a4d79);
     color: white;
     z-index: 1001;
     padding: 0 20px;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 2px 10px rgba(139, 90, 140, 0.3);
+    box-shadow: 0 4px 20px rgba(139, 90, 140, 0.25);
+    backdrop-filter: blur(10px);
+}
+
+.mobile-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .mobile-logo h1 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     margin: 0;
     font-weight: 300;
+    letter-spacing: 2px;
+}
+
+.mobile-subtitle {
+    font-size: 0.8rem;
+    opacity: 0.8;
+    text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-/* Hamburger Menu */
-.nav-hamburger {
+.mobile-cart-badge {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 5px 12px;
+    position: relative;
+    margin-right: 60px;
+    /* Space for hamburger */
+}
+
+.mobile-cart-icon {
+    font-size: 1.2rem;
+}
+
+.mobile-cart-count {
+    background: #ff6b6b;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+/* ==========================================================================
+     ADVANCED HAMBURGER MENU
+     ========================================================================== */
+
+.hamburger-menu {
+    position: relative;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
+    transition: all 0.3s ease;
     padding: 5px;
+    border-radius: 4px;
 }
 
-.bar {
-    width: 25px;
+.hamburger-menu:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.hamburger-box {
+    width: 20px;
+    height: 16px;
+    position: relative;
+}
+
+.hamburger-inner {
+    display: block;
+    top: 50%;
+    margin-top: -1.5px;
+    transition: background-color 0.3s ease;
+}
+
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after {
+    width: 20px;
     height: 3px;
-    background: white;
-    margin: 3px 0;
-    transition: 0.3s;
+    background-color: white;
     border-radius: 2px;
+    position: absolute;
+    transition: transform 0.3s ease;
 }
 
-/* Hamburger animation when active */
-.bar-active:nth-child(1) {
-    transform: rotate(-45deg) translate(-5px, 6px);
+.hamburger-inner::before,
+.hamburger-inner::after {
+    content: '';
+    display: block;
 }
 
-.bar-active:nth-child(2) {
+.hamburger-inner::before {
+    top: -6px;
+}
+
+.hamburger-inner::after {
+    bottom: -6px;
+}
+
+/* Active hamburger animation */
+.hamburger-menu.active .hamburger-inner {
+    transform: rotate(45deg);
+    background-color: white;
+}
+
+.hamburger-menu.active .hamburger-inner::before {
+    top: 0;
+    transform: rotate(0deg);
     opacity: 0;
 }
 
-.bar-active:nth-child(3) {
-    transform: rotate(45deg) translate(-5px, -6px);
+.hamburger-menu.active .hamburger-inner::after {
+    bottom: 0;
+    transform: rotate(-90deg);
 }
 
-/* Menu Overlay */
+/* ==========================================================================
+     SMART SIDEBAR NAVIGATION
+     ========================================================================== */
+
+.left-navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 320px;
+    height: 100vh;
+    background: linear-gradient(145deg, #8b5a8c, #7a4d79, #6b4569);
+    color: white;
+    padding: 0;
+    z-index: 1000;
+    box-shadow: 4px 0 25px rgba(139, 90, 140, 0.3);
+    overflow-y: auto;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.left-navigation.desktop-mode {
+    transform: translateX(0);
+}
+
+.left-navigation.mobile-mode {
+    transform: translateX(-100%);
+    width: 90%;
+    max-width: 320px;
+}
+
+.left-navigation.mobile-mode.nav-open {
+    transform: translateX(0);
+}
+
+/* Enhanced overlay */
 .menu-overlay {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.6);
     z-index: 999;
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease;
 }
 
-/* Mobile Media Query */
-@media (max-width: 768px) {
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
 
-    /* Show mobile header */
+    to {
+        opacity: 1;
+    }
+}
+
+/* ==========================================================================
+     NAVIGATION CONTENT
+     ========================================================================== */
+
+.nav-header {
+    padding: 40px 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    text-align: center;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-logo h1 {
+    font-size: 3rem;
+    margin: 0;
+    font-weight: 200;
+    letter-spacing: 3px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.nav-logo span {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    display: block;
+    margin-top: 5px;
+}
+
+.device-debug {
+    margin-top: 10px;
+    opacity: 0.6;
+    font-size: 0.7rem;
+}
+
+.nav-menu {
+    padding: 30px 0;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 18px 30px;
+    background: none;
+    border: none;
+    color: white;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    border-left: 4px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.nav-link:hover::before {
+    left: 100%;
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-left-color: white;
+    transform: translateX(8px);
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.nav-icon {
+    font-size: 1.3rem;
+    margin-right: 20px;
+    width: 25px;
+    text-align: center;
+}
+
+.nav-text {
+    flex: 1;
+    font-weight: 400;
+}
+
+.nav-arrow {
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+}
+
+.nav-link:hover .nav-arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Social links */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+}
+
+.social-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+     RESPONSIVE BEHAVIOR
+     ========================================================================== */
+
+@media (max-width: 1024px) {
+    .left-navigation {
+        width: 300px;
+    }
+}
+
+@media (max-width: 768px) {
     .mobile-header {
         display: flex;
     }
 
-    /* Hide sidebar by default on mobile */
-    .left-navigation {
-        transform: translateX(-100%);
-        width: 280px;
-        z-index: 1000;
-    }
-
-    /* Show sidebar when menu is open */
-    .left-navigation.nav-open {
-        transform: translateX(0);
-    }
-
-    /* Show overlay when menu is open */
-    .menu-overlay {
-        display: block;
-    }
-
-    /* Adjust main content for mobile header */
     .main-content {
-        margin-left: 0;
-        padding-top: 60px;
-        /* Account for fixed mobile header */
+        margin-left: 0 !important;
+        padding-top: 70px;
     }
+}
 
-    /* Adjust hero section for mobile header */
-    .hero-section {
-        padding-top: 40px;
-        /* Less padding since we have mobile header */
+@media (min-width: 769px) {
+    .main-content {
+        margin-left: 320px;
+        transition: margin-left 0.3s ease;
     }
+}
+
+/* ==========================================================================
+     MAIN CONTENT ADJUSTMENTS
+     ========================================================================== */
+
+.main-content {
+    min-height: 100vh;
+    transition: margin-left 0.3s ease;
+}
+
+/* Smooth scrolling for all elements */
+html {
+    scroll-behavior: smooth;
 }
