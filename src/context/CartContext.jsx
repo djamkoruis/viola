@@ -52,7 +52,6 @@ export const CartProvider = ({ children }) => {
         isOpen: false
     });
 
-    // Persist cart to localStorage
     useEffect(() => {
         const savedCart = localStorage.getItem('violaCart');
         if (savedCart) {
