@@ -1,11 +1,11 @@
 // src/components/Navigation.jsx
 import React, { useState } from 'react';
-import { useCart } from '../context/CartContext'; // Add this import
+import { useCart } from '../context/CartContext';
 import './Navigation.css';
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { getTotalItems } = useCart(); // Get cart functionality
+  const { getTotalItems } = useCart();
   const cartItemCount = getTotalItems();
 
   const toggleMenu = () => {
@@ -17,12 +17,12 @@ const Navigation = () => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-    setIsMenuOpen(false);
+    setIsMenuOpen(false); // Close menu after clicking
   };
 
   return (
     <>
-      {/* Mobile Header */}
+      {/* Mobile Header - Only visible on mobile */}
       <header className="mobile-header">
         <div className="mobile-logo">
           <h1>Viola</h1>
@@ -34,7 +34,7 @@ const Navigation = () => {
         </div>
       </header>
 
-      {/* Menu Overlay */}
+      {/* Menu Overlay - Darkens background when menu is open */}
       {isMenuOpen && (
         <div className="menu-overlay" onClick={toggleMenu}></div>
       )}
